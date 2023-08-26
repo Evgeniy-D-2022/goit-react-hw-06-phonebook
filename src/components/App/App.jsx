@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import css from './App.module.css'
-import Form from "./Form/Form";
-import Contacts from "./Contacts/Contacts";
+import Form from "../Form/Form";
+import Contacts from "../Contacts/Contacts";
 import { nanoid } from 'nanoid'
-import Filter from "./Filter/Filter";
+import Filter from "../Filter/Filter";
 import Notiflix from "notiflix";
 
 const App = () => {
