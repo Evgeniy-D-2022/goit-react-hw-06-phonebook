@@ -3,7 +3,7 @@ import initContacts from '../components/contacts.json';
 import { nanoid } from "nanoid";
 
 
-const contactsSlice = createSlice({
+export const contactsSlice = createSlice({
     name: 'contacts',
     initialState: {
         contacts: initContacts,
