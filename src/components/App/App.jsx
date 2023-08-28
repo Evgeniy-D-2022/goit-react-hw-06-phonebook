@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 const App = () => {
 
   const contacts = useSelector(state => state.contacts.contacts);
-  console.log(contacts);
+  // console.log(contacts);
 
     return (
     <div className={css.container}>

@@ -33,7 +33,7 @@ const Contacts = () => {
           ))}
       </ul>
        
-    )}
+    )};
 
     // Contacts.propTypes = {
     //   contacts: PropTypes.array,
