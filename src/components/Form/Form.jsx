@@ -1,50 +1,50 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import css from './Form.module.css';
+import { addContacts } from 'redux/contactsSlice';
+import Notiflix from "notiflix";
 
-const Form =({ creatContact }) => {
- const [name, setName] = useState('');
- const [number, setNumber] = useState('');
- 
 
-  const addContact = e => {
+const Form = () => {
+  
+  const contacts = useSelector(state => state.contacts.contacts);
+
+  const dispatch = useDispatch()
+
+  const handleSubmit = e => {
     e.preventDefault();
 
-    creatContact({ name, number });
-    setName('');
-    setNumber('');
-  };
+    const contact = {
+      name: e.target.name.value,
+      number: e.target.number.value,
+    };
 
-  const handleChange = e => {
-    const { name, value } = e.currentTarget;
-
-    switch(name) {
-      case 'name': setName(value);
-      break;
-      case 'number': setNumber(value);
-      break;
-      default: {
-        console.log('There is no such input like that');
-      }
+    if( contacts.find(contact => contact.name === e.target.name.value)) {
+      Notiflix.Notify.warning(`${e.target.name.value} is already in contacts.`);
+      e.target.reset()
+      return;
     }
-   
+    dispatch(addContacts(contact));
+
+    e.target.reset()
   };
 
+  
   return (
         <>
-         <form className={css.form} onSubmit={addContact}>
+         <form className={css.form} onSubmit={handleSubmit}>
         <label className={css.form__label}>Name
         <input
         className={css.form__input}
         type="text"
         name="name"
-        // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         pattern='^[a-zA-Zа-яА-ЯёЁ][a-zA-Z-а-яА-ЯёЁ ]+[a-zA-Zа-яА-ЯёЁ]?$'
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
         placeholder="Name"
-        onChange={handleChange}
-        value={name}
         />
+        </label>
+        <label className={css.form__label}>Number
         <input
         className={css.form__input}
         type="tel"
@@ -53,8 +53,6 @@ const Form =({ creatContact }) => {
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
         placeholder="phone number xxx-xx-xx"
-        onChange={handleChange}
-        value={number}
         />
         </label>
         <button className={css.form__btn} type="submit">Add Contact</button>
