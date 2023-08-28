@@ -1,7 +1,7 @@
 // import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import css from './Form.module.css';
-import { addContacts } from 'redux/contactsSlice';
+import { addContact } from 'redux/contactsSlice';
 import Notiflix from "notiflix";
 
 
@@ -24,7 +24,7 @@ const Form = () => {
       e.target.reset()
       return;
     }
-    dispatch(addContacts(contact));
+    dispatch(addContact(contact));
 
     e.target.reset()
   };

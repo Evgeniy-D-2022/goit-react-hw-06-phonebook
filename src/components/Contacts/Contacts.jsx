@@ -7,11 +7,11 @@ import { deleteContact } from "redux/contactsSlice";
 
 const Contacts = () => {
   const contacts = useSelector(state => state.contacts.contacts);
-  const filter = useSelector(state=> state.filter);
+  const filterValue = useSelector(state => state.filter.filter);
   const dispatch = useDispatch();
 
   const visibleContacts = contacts.filter(contact => 
-    contact.name.toLowerCase().includes(filter));
+    contact.name.toLowerCase().includes(filterValue.toLowerCase()));
 
     return (
       
